@@ -2,7 +2,7 @@ import React from "react";
 
 function SearchBar(props) {
   // the props list includes handleformsubmit, handleInputChange, apple
-  console.log(props.apple) // which would return the string "apple"
+  
   return (
     <div className="container-fluid">
       <form className="d-flex">

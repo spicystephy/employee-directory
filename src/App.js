@@ -22,7 +22,7 @@ class App extends React.Component {
       email: item.email,
       phone: item.cell,
       image: item.picture.thumbnail,
-      dob: item.dob.date,
+      gender: item.gender,
     }));
     this.setState({ employees });
   };
@@ -30,7 +30,8 @@ class App extends React.Component {
   handleInputChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
-    this.setState({ name: value });
+    this.setState({ search: value });
+    console.log(value);
   };
 
   handleFormSubmit = (e) => {
@@ -55,7 +56,7 @@ class App extends React.Component {
     if (employee.email.includes(this.state.search)) {
       return true;
     }
-    if (employee.dob.includes(this.state.search)) {
+    if (employee.gender.includes(this.state.search)) {
       return true;
     }
     return false;
@@ -68,7 +69,6 @@ class App extends React.Component {
         <SearchBar
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
-          apple={"apple"}
           employees={[1,2,3]}
         />
         <thead>
@@ -77,7 +77,7 @@ class App extends React.Component {
             <th>Name</th>
             <th>Phone #</th>
             <th>Email</th>
-            <th>D.O.B.</th>
+            <th>Gender</th>
           </tr>
         </thead>
         <tbody>
@@ -90,18 +90,18 @@ class App extends React.Component {
               // <tr key={employee.name + i}>
               <tr>
                 <td>
-                  <img src={employees.image} alt={employee.name} />
+                  <img src={employee.image} alt={employee.name} />
                 </td>
                 <td>{employee.name}</td>
                 <td>{employee.phone}</td>
                 <td>{employee.email}</td>
-                <td>{employee.dob}</td>
+                <td>{employee.gender}</td>
               </tr>
             ))
           )}
         </tbody>
-        <SearchResults
-        results={[1,2,3]} />
+        {/* <SearchResults
+        results={[1,2,3]} /> */}
       </table>
     );
   }
