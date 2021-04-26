@@ -8,7 +8,7 @@ function SearchBar(props) {
     <div className="container-fluid">
       <form className="d-flex">
         <input
-          className="form-control me-2"
+          className="form-control me-2 w-50"
           type="search"
           placeholder="Search"
           aria-label="Search"

@@ -1,7 +1,6 @@
 import React from "react";
 import API from "./utils/API";
 import SearchBar from "./components/searchBar/SearchBar";
-import EmployeeList from "./components/employeeList/EmployeeList";
 import Header from "./components/header/Header";
 
 // import "./App.css";
@@ -31,7 +30,7 @@ class App extends React.Component {
 
   handleInputChange = (e) => {
     const value = e.target.value;
-    const name = e.target.name;
+    // const name = e.target.name;
     this.setState({ search: value });
   };
 
@@ -64,22 +63,45 @@ class App extends React.Component {
   };
 
   render() {
-    const { employees } = this.state.length;
     return (
       <>
-      <Header/>
+        <Header />
         <SearchBar
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
           employees={[1, 2, 3]}
         />
-
-        <EmployeeList
-          employees={this.state.employees}
-          getEmployees={this.getEmployees}
-        />
+        <div className="container-fluid">
+          <div className="row align-items-center">
+            <p className="col">Image</p>
+            <p className="col">First Name & Last Name</p>
+            <p className="col">Phone Number</p>
+            <p className="col">Email</p>
+            <p className="col">Gender</p>
+          </div>
+          <div className="container-fluid w-100">
+            {this.state.employees.length === 0 ? (
+              <h2> Try again!</h2>
+            ) : (
+              this.state.employees
+                .filter(this.filterEmployees)
+                .map((employee) => (
+                  <ul className="list-group list-group-horizontal w-100">
+                    <li className="list-group-item">
+                      <img src={employee.image} alt={employee.name} />
+                    </li>
+                    <li className="list-group-item flex-fill">{employee.name}</li>
+                    <li className="list-group-item flex-fill">{employee.phone}</li>
+                    <li className="list-group-item flex-fill">{employee.email}</li>
+                    <li className="list-group-item flex-fill">{employee.gender}</li>
+                  </ul>
+                ))
+            )}
+          </div>
+        </div>
       </>
     );
   }
 }
+
 export default App;
