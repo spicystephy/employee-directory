@@ -1,7 +1,9 @@
 import React from "react";
 import API from "./utils/API";
-import SearchBar from "./components/SearchBar";
-import SearchResults from "./components/SearchResults";
+import SearchBar from "./components/searchBar/SearchBar";
+import EmployeeList from "./components/employeeList/EmployeeList";
+import Header from "./components/header/Header";
+
 // import "./App.css";
 
 class App extends React.Component {
@@ -31,7 +33,6 @@ class App extends React.Component {
     const value = e.target.value;
     const name = e.target.name;
     this.setState({ search: value });
-    console.log(value);
   };
 
   handleFormSubmit = (e) => {
@@ -63,54 +64,22 @@ class App extends React.Component {
   };
 
   render() {
-    const { employees } = this.state;
+    const { employees } = this.state.length;
     return (
-      <table>
+      <>
+      <Header/>
         <SearchBar
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
-          employees={[1,2,3]}
+          employees={[1, 2, 3]}
         />
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Phone #</th>
-            <th>Email</th>
-            <th>Gender</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.length === 0 ? (
-            <tr>
-              <h2> No Employees!</h2>
-            </tr>
-          ) : (
-            employees.filter(this.filterEmployees).map((employee) => (
-              // <tr key={employee.name + i}>
-              <tr>
-                <td>
-                  <img src={employee.image} alt={employee.name} />
-                </td>
-                <td>{employee.name}</td>
-                <td>{employee.phone}</td>
-                <td>{employee.email}</td>
-                <td>{employee.gender}</td>
-              </tr>
-            ))
-          )}
-        </tbody>
-        {/* <SearchResults
-        results={[1,2,3]} /> */}
-      </table>
+
+        <EmployeeList
+          employees={this.state.employees}
+          getEmployees={this.getEmployees}
+        />
+      </>
     );
   }
 }
 export default App;
-
-// for(const key in employee) => {
-//   if (key === "image") continue;
-//   if (employee[key].includes(this.state.search)){
-//     return true;
-//     }
-//    }
