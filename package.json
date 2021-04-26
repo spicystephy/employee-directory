@@ -1,6 +1,5 @@
 {
   "name": "employee-directory",
-  "homepage": "https://spicystephy.github.io/employee-directory",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
